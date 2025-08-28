@@ -52,7 +52,7 @@ def binarioDecimal(valor_convertir):
 
 
 def main():
-    #AGREGAR VERIFICACIONES
+    #AGREGAR VERIFICACIONES Y GUI
     print("PARA LOS VALORES CON DECIMALES USAR PUNTO")
     print("")
     valor_convertir = 0
