@@ -131,12 +131,12 @@ root.geometry('500x600')
 root.resizable(False, False)
 root.title('Transformador de Bases Numericas')
 root.iconbitmap('LogoOkami.ico')
+root.config(bg="#C7C7C7")
 
 valor_inicial = StringVar()
 
 Frame(root, bg="#373B4F", height=200, width=500).place(x=0, y=0)
 Frame(root, bg="#373B4F", height=50, width=500).place(x=0, y=550)
-Frame(root, bg="#C7C7C7", height=350, width=500).place(x=0, y=200)
 Label(root, text="CONVERSOR DE BASES", font=("Arial", 28), bg="#373B4F", fg="#FFFFFF").place(x=25, y=35)
 Label(root, text="NOTA: PARA INGRESAR NUMEROS CON DECIMALES USE PUNTO", font=("Arial", 10), bg="#373B4F", fg="#FFFFFF").place(x=20, y=165)
 Label(root, text="Ingrese el numero en binario", font=("Arial", 15), bg="#373B4F", fg="#FFFFFF").place(x=20, y=95)
