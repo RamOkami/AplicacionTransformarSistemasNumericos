@@ -2,6 +2,40 @@
 from tkinter import *
 from tkinter import StringVar
 
+def binarioOctal(valor_convertir):
+    res_octal_entero = ""
+    res_octal_decimal = ""
+    res_octal = ""
+
+    if '.' in valor_convertir:
+        valor_completo = valor_convertir.split('.')
+        valor_entero = valor_completo[0]
+        valor_decimal = valor_completo[1]
+    else:
+        valor_entero = valor_convertir
+
+    while len(valor_entero) % 3 != 0:
+        valor_entero = '0' + valor_entero
+
+    for i in range(0, len(valor_entero), 3):
+        grupo = valor_entero[i:i + 3]
+        decimal = 0
+        for j, bit in enumerate(grupo):
+            decimal += int(bit) * (2 ** (2 - j))
+        res_octal_entero += str(decimal)
+
+    if '.' in valor_convertir:
+        bin_decimal = valor_decimal
+        for _ in range(10):
+            bin_decimal += '0' * ((3 - len(bin_decimal) % 3) % 3)
+            grupo = bin_decimal[:3]
+            decimal = int(grupo[0]) * 4 + int(grupo[1]) * 2 + int(grupo[2]) * 1
+            res_octal_decimal += str(decimal)
+            bin_decimal = bin_decimal[3:]
+            if bin_decimal == '' or int(bin_decimal) == 0:
+                break
+        return f'{res_octal_entero}.{res_octal_decimal}'
+    return res_octal
 
 def binarioHexadecimal(valor_convertir):
     valor_entero = int(valor_convertir)
@@ -59,17 +93,30 @@ def main():
     valor_convertir = valor_inicial.get()
     valor_decimal = float(binarioDecimal(valor_convertir))
     valor_hexadecimal = binarioHexadecimal(valor_decimal)
+    valor_octal = binarioOctal(valor_convertir)
 
-    Frame(root, bg="#FFFFFF", width=454, height=35).place(x=23, y=250)
-    Frame(root, bg="#FFFFFF", width=454, height=35).place(x=23, y=340)
+    salida_decimal.config(state="normal")
+    salida_hexadecimal.config(state="normal")
+    salida_octal.config(state="normal")
 
-    Label(root, bg="#FFFFFF", fg="#373B4F", text=valor_decimal, font=("Arial", 18)).place(x=23, y=252)
-    Label(root, bg="#FFFFFF", fg="#373B4F", text=valor_hexadecimal, font=("Arial", 18)).place(x=23, y=342)
+    salida_decimal.delete(0, END)
+    salida_decimal.insert(0, valor_decimal)
+
+    salida_hexadecimal.delete(0, END)
+    salida_hexadecimal.insert(0, valor_hexadecimal)
+
+    salida_octal.delete(0, END)
+    salida_octal.insert(0, valor_octal)
+
+    for i in [salida_decimal, salida_hexadecimal, salida_octal]:
+        i.config(state="readonly")
+
 
 root = Tk()
 root.geometry('500x600')
 root.resizable(False, False)
 root.title('Transformador de Bases Numericas')
+root.iconbitmap('LogoOkami.ico')
 
 valor_inicial = StringVar()
 
@@ -82,11 +129,17 @@ Label(root, text="Ingrese el numero en binario", font=("Arial", 15), bg="#373B4F
 Entry(root, textvariable=valor_inicial, width=30, font=("Arial", 20), fg="#373B4F").place(x=23, y=127)
 
 Label(root, text="VALOR DECIMAL", font=("Arial", 15), bg="#C7C7C7", fg="#373B4F").place(x=20, y=220)
-Frame(root, bg="#FFFFFF", width=454, height=35).place(x=23, y=250)
+salida_decimal = Entry(root, state="readonly", width=30, font=("Arial", 20), fg="#373B4F")
+salida_decimal.place(x=23, y=250)
 
 Label(root, text="VALOR HEXADECIMAL", font=("Arial", 15), bg="#C7C7C7", fg="#373B4F").place(x=20, y=310)
-Frame(root, bg="#FFFFFF", width=454, height=35).place(x=23, y=340)
+salida_hexadecimal = Entry(root, state="readonly", width=30, font=("Arial", 20), fg="#373B4F")
+salida_hexadecimal.place(x=23, y=340)
 
-Button(root, bg="#373B4F", fg="#FFFFFF", text="CONVERTIR", command=main, font=("Arial", 15),pady=2).place(x=180, y=400)
+Label(root, text="VALOR OCTAL", font=("Arial", 15), bg="#C7C7C7", fg="#373B4F").place(x=20, y=400)
+salida_octal = Entry(root, state="readonly", width=30, font=("Arial", 20), fg="#373B4F")
+salida_octal.place(x=23, y=430)
+
+Button(root, bg="#373B4F", fg="#FFFFFF", text="CONVERTIR", command=main, font=("Arial", 15),pady=2).place(x=180, y=490)
 
 root.mainloop()
