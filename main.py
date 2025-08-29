@@ -1,5 +1,6 @@
 """CODIGO CREADO POR RAMSES QUINTANILLA"""
 from tkinter import *
+from tkinter import messagebox
 from tkinter import StringVar
 
 def binarioOctal(valor_convertir):
@@ -35,7 +36,7 @@ def binarioOctal(valor_convertir):
             if bin_decimal == '' or int(bin_decimal) == 0:
                 break
         return f'{res_octal_entero}.{res_octal_decimal}'
-    return res_octal
+    return res_octal_entero
 
 def binarioHexadecimal(valor_convertir):
     valor_entero = int(valor_convertir)
@@ -89,8 +90,21 @@ def binarioDecimal(valor_convertir):
 
 
 def main():
-    #AGREGAR VERIFICACIONES Y GUI
+    #AGREGAR VERIFICACIONES
     valor_convertir = valor_inicial.get()
+
+    verificador = False
+    valores_no_permitidos = ['2', '3', '4', '5', '6', '7', '8', '9']
+    for i in valores_no_permitidos:
+        if i in valor_convertir:
+            verificador = True
+            break
+
+    if verificador:
+        messagebox.showinfo("ERROR", f'SE HA INTRODUCIDO UN VALOR INVALIDO \nINTRODUCIR SOLO VALORES 0 Y 1')
+        return
+
+
     valor_decimal = float(binarioDecimal(valor_convertir))
     valor_hexadecimal = binarioHexadecimal(valor_decimal)
     valor_octal = binarioOctal(valor_convertir)
