@@ -6,7 +6,7 @@ verifique que en la misma carpeta "dist" este el archivo "LogoOkami.ico" para un
 
 Uso de la Aplicacion de Convercion de Bases.
 1. Ingrese un valor en binario en el cuadro respectivo
-   IMPORTANTE: SE ACEPTAN VALORES CON DECIMALES FRACCIONARIOS PERO ESTE SIEMPRE DEBE LLEVAR EL CARACTER . Y NO ,
+   (IMPORTANTE: SE ACEPTAN VALORES CON DECIMALES FRACCIONARIOS PERO ESTE SIEMPRE DEBE LLEVAR EL CARACTER . Y NO ,)
    
 2. Presione el boton de convertir y se realizaran las conversiones.
    CONVERSIONES:
